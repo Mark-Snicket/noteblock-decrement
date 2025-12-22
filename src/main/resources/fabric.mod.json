@@ -5,11 +5,11 @@
 	"name": "Noteblock Decrement",
 	"description": "Adds the Noteblock decrement stick, allowing you to decrement the note of a noteblock",
 	"authors": [
-		"Mark"
+		"Mark Snicket"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/project/noteblock_decrementer/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/noteblock_decrementer/",
+		"sources": "https://github.com/Mark-Snicket/noteblock-decrement"
 	},
 	"license": "MIT",
 	"icon": "assets/noteblock_decrement/icon.png",
@@ -22,6 +22,7 @@
 	"depends": {
 		"fabricloader": ">=0.18.3",
 		"minecraft": [
+			"1.21.1",
 			"1.21.2",
 			"1.21.3",
 			"1.21.4",
@@ -32,5 +33,14 @@
 		],
 		"java": ">=21",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"update_checker": true,
+			"links": {
+				"modmenu.modrinth": "https://modrinth.com/mod/noteblock_decrementer",
+				"modmenu.discord": "https://discord.gg/hHMrX2GjzM"
+			}
+		}
 	}
 }
