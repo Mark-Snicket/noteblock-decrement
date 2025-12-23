@@ -37,23 +37,16 @@ public class NoteblockDecrementItem extends Item {
             if (world.isClient) {
                 return ActionResult.SUCCESS;
             } else {
-
-                for (int i = 0; i < 23; i++) {
-
-                blockState = (BlockState) blockState.cycle(NOTE);
+                for (int i = 0; i < 24; i++) {
+                    blockState = (BlockState) blockState.cycle(NOTE);
+                }
                 world.setBlockState(blockPos, blockState, 3);
-
-            }
-
-                world.setBlockState(blockPos, blockState.cycle(NOTE), 3);
                 this.playNote(player, blockState, world, blockPos, noteBlock);
                 player.incrementStat(Stats.TUNE_NOTEBLOCK);
             }
-
         }
 
         return ActionResult.PASS;
-
 
     }
 
@@ -62,8 +55,5 @@ public class NoteblockDecrementItem extends Item {
             world.addSyncedBlockEvent(pos, noteBlock, 0, 0);
             world.emitGameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, pos);
         }
-
     }
-
-
 }
