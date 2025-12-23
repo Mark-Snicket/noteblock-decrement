@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,23 +37,15 @@ public class NoteblockDecrementItem extends Item {
             if (level.isClientSide()) {
                 return InteractionResult.SUCCESS;
             } else {
-
                 for (int i = 0; i < 23; i++) {
-
                 blockState = (BlockState) blockState.cycle(NOTE);
-                level.setBlockAndUpdate(blockPos, blockState);
-
             }
-
-                level.setBlockAndUpdate(blockPos, blockState.cycle(NOTE));
+                level.setBlockAndUpdate(blockPos, blockState);
                 this.playNote(player, blockState, level, blockPos, noteBlock);
                 player.awardStat(Stats.TUNE_NOTEBLOCK);
             }
-
         }
-
         return InteractionResult.PASS;
-
 
     }
 
@@ -63,8 +54,5 @@ public class NoteblockDecrementItem extends Item {
             level.blockEvent(blockPos, noteBlock, 0, 0);
             level.gameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, blockPos);
         }
-
     }
-
-
 }
