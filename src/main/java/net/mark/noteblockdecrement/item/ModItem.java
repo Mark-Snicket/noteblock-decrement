@@ -16,14 +16,14 @@ import java.util.function.Function;
 
 public class ModItem {
 
-    public static final Item NOTEBLOCK_DECREMENTER = registerItem("noteblock_decrementer", properties -> new NoteblockDecrementItem(properties.stacksTo(1).rarity(Rarity.EPIC)));
+    public static final Item NOTEBLOCK_DECREMENTER = registerItem(properties -> new NoteblockDecrementItem(properties.stacksTo(1).rarity(Rarity.EPIC)));
 
 
 
 
-    private static Item registerItem(String name, Function<Item.Properties, Item> function) {
-        return Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(NoteblockDecrement.MOD_ID, name),
-                function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(NoteblockDecrement.MOD_ID, name)))));
+    private static Item registerItem(Function<Item.Properties, Item> function) {
+        return Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(NoteblockDecrement.MOD_ID, "noteblock_decrementer"),
+                function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(NoteblockDecrement.MOD_ID, "noteblock_decrementer")))));
     }
 
 

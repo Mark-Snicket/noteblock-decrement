@@ -38,24 +38,15 @@ public class NoteblockDecrementItem extends Item {
             if (level.isClientSide()) {
                 return InteractionResult.SUCCESS;
             } else {
-
-                for (int i = 0; i < 23; i++) {
-
+                for (int i = 0; i < 24; i++) {
                 blockState = (BlockState) blockState.cycle(NOTE);
-                level.setBlockAndUpdate(blockPos, blockState);
-
             }
-
-                level.setBlockAndUpdate(blockPos, blockState.cycle(NOTE));
+                level.setBlockAndUpdate(blockPos, blockState);
                 this.playNote(player, blockState, level, blockPos, noteBlock);
                 player.awardStat(Stats.TUNE_NOTEBLOCK);
             }
-
         }
-
         return InteractionResult.PASS;
-
-
     }
 
     private void playNote(@Nullable Entity entity, BlockState blockState, Level level, BlockPos blockPos, NoteBlock noteBlock) {
@@ -63,8 +54,5 @@ public class NoteblockDecrementItem extends Item {
             level.blockEvent(blockPos, noteBlock, 0, 0);
             level.gameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, blockPos);
         }
-
     }
-
-
 }
