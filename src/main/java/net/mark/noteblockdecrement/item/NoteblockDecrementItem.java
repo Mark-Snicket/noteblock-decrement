@@ -37,7 +37,7 @@ public class NoteblockDecrementItem extends Item {
             if (level.isClientSide()) {
                 return InteractionResult.SUCCESS;
             } else {
-                for (int i = 0; i < 23; i++) {
+                for (int i = 0; i < 24; i++) {
                 blockState = (BlockState) blockState.cycle(NOTE);
             }
                 level.setBlockAndUpdate(blockPos, blockState);
