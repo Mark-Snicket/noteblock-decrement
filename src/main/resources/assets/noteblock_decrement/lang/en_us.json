@@ -1,3 +1,4 @@
 {
-    "item.noteblock_decrement.noteblock_decrementer": "Noteblock Decrementer"
+    "item.noteblock_decrement.noteblock_decrementer": "Noteblock Decrementer",
+    "tooltip.noteblock_decrementer.NoteblockDecrementerItem.tooltip": "Decreases the tone of a Note Block when shift clicked!"
 }
