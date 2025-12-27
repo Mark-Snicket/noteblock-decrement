@@ -1,11 +1,15 @@
 package net.mark.noteblockdecrement.item;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +17,8 @@ import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 import static net.minecraft.world.level.block.NoteBlock.INSTRUMENT;
 import static net.minecraft.world.level.block.NoteBlock.NOTE;
@@ -54,5 +60,12 @@ public class NoteblockDecrementItem extends Item {
             level.blockEvent(blockPos, noteBlock, 0, 0);
             level.gameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, blockPos);
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+
+        consumer.accept(Component.translatable("tooltip.noteblock_decrementer.NoteblockDecrementerItem.tooltip"));
+        super.appendHoverText(itemStack, tooltipContext,tooltipDisplay, consumer, tooltipFlag);
     }
 }
