@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/noteblock_decrementer/",
-		"sources": "https://github.com/Mark-Snicket/noteblock-decrement"
+		"sources": "https://github.com/Mark-Snicket/noteblock-decrement",
+		"issues": "https://github.com/Mark-Snicket/noteblock-decrement/issues/"
 	},
 	"license": "MIT",
 	"icon": "assets/noteblock_decrement/icon.png",
