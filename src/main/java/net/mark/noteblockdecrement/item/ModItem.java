@@ -1,7 +1,7 @@
 package net.mark.noteblockdecrement.item;
 
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.mark.noteblockdecrement.NoteblockDecrement;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,7 +30,7 @@ public class ModItem {
 
 
     public static void registerModItems() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
             entries.accept(ModItem.NOTEBLOCK_DECREMENTER);
         });
     }
