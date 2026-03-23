@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "noteblock-decrement",
-	"version": "${version}",
+	"version": "$version",
 	"name": "Noteblock Decrement",
 	"description": "Adds the Noteblock decrement stick, allowing you to decrement the note of a noteblock",
 	"authors": [
@@ -21,9 +21,9 @@
 		]
 	},
 	"depends": {
-		"fabricloader": ">=0.18.3",
+		"fabricloader": ">=0.18.4",
 		"minecraft": [
-			"26.1-pre.2"
+			"26.1"
 		],
 		"java": ">=21",
 		"fabric-api": "*"
