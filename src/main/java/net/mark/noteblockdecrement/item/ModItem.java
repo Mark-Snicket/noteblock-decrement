@@ -3,28 +3,29 @@ package net.mark.noteblockdecrement.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.mark.noteblockdecrement.NoteblockDecrement;
-import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 
 public class ModItem {
 
-    public static final Item NOTEBLOCK_DECREMENTER = registerItem(new NoteblockDecrementItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)));
+    public static final Item NOTEBLOCK_DECREMENTER = registerItem(new NoteblockDecrementItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 
 
 
     private static Item registerItem(Item item) {
-        return Registry.register(Registries.ITEM, Identifier.of(NoteblockDecrement.MOD_ID, "noteblock_decrementer"), item);
+        return Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(NoteblockDecrement.MOD_ID, "noteblock_decrementer"), item);
     }
 
 
 
 
     public static void registerModItems() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(entries -> {
-            entries.add(ModItem.NOTEBLOCK_DECREMENTER);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
+            entries.accept(ModItem.NOTEBLOCK_DECREMENTER);
         });
     }
 }

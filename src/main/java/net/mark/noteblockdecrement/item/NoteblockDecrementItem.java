@@ -1,73 +1,73 @@
 package net.mark.noteblockdecrement.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.NoteBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.NoteBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static net.minecraft.block.NoteBlock.INSTRUMENT;
-import static net.minecraft.block.NoteBlock.NOTE;
+import static net.minecraft.world.level.block.NoteBlock.INSTRUMENT;
+import static net.minecraft.world.level.block.NoteBlock.NOTE;
 
 
 public class NoteblockDecrementItem extends Item {
 
-    public NoteblockDecrementItem(Settings settings) {
-        super(settings);
+    public NoteblockDecrementItem(Properties properties) {
+        super(properties);
     }
 
 
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        Block clickedBlock = world.getBlockState(context.getBlockPos()).getBlock();
-        PlayerEntity player = context.getPlayer();
-        BlockPos blockPos = context.getBlockPos();
-        BlockState blockState = world.getBlockState(blockPos);
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
+        Player player = context.getPlayer();
+        BlockPos blockPos = context.getClickedPos();
+        BlockState blockState = level.getBlockState(blockPos);
 
         if (clickedBlock instanceof NoteBlock noteBlock) {
 
-            if (world.isClient) {
-                return ActionResult.SUCCESS;
+            if (level.isClientSide()) {
+                return InteractionResult.SUCCESS;
             } else {
                 for (int i = 0; i < 24; i++) {
                     blockState = blockState.cycle(NOTE);
                 }
-                world.setBlockState(blockPos, blockState, 3);
-                this.playNote(player, blockState, world, blockPos, noteBlock);
-                player.incrementStat(Stats.TUNE_NOTEBLOCK);
+                level.setBlockAndUpdate(blockPos, blockState);
+                this.playNote(player, blockState, level, blockPos, noteBlock);
+                player.awardStat(Stats.TUNE_NOTEBLOCK);
             }
 
         }
 
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
 
 
     }
 
-    private void playNote(@Nullable Entity entity, BlockState blockState, World world, BlockPos pos, NoteBlock noteBlock) {
-        if (blockState.get(INSTRUMENT).isNotBaseBlock() || world.getBlockState(pos.up()).isAir()) {
-            world.addSyncedBlockEvent(pos, noteBlock, 0, 0);
-            world.emitGameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, pos);
+    private void playNote(@Nullable Entity entity, BlockState blockState, Level level, BlockPos pos, NoteBlock noteBlock) {
+        if (blockState.getValue(INSTRUMENT).worksAboveNoteBlock() || level.getBlockState(pos.above()).isAir()) {
+            level.blockEvent(pos, noteBlock, 0, 0);
+            level.gameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, pos);
         }
 
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable("tooltip.noteblock_decrementer.NoteblockDecrementerItem.tooltip"));
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        tooltip.add(Component.translatable("tooltip.noteblock_decrementer.NoteblockDecrementerItem.tooltip"));
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
 }
