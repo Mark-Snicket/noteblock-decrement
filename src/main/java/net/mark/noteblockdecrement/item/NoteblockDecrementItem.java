@@ -26,8 +26,8 @@ import static net.minecraft.world.level.block.NoteBlock.NOTE;
 
 public class NoteblockDecrementItem extends Item {
 
-    public NoteblockDecrementItem(net.minecraft.world.item.Item.Properties settings) {
-        super(settings);
+    public NoteblockDecrementItem(Properties properties) {
+        super(properties);
     }
 
 
